@@ -4,6 +4,7 @@ A wallpaper downloader from pexels written in golang
 ## usage
 ```
 git clone https://github.com/ferretcode/walldl ~/walldl
+mkdir -p ~/walldl/wallpapers
 export PATH=$PATH:/home/$USER/walldl/bin/
 export WALLDL_API_KEY=pexels api key
 walldl -c "category" -n "1"

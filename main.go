@@ -117,7 +117,7 @@ func getWallpapers(category string, number int, apiKey ApiKey) {
 			log.Fatal(err)
 		}
 
-		file, err := os.Create(fmt.Sprintf("%s/walldl/%s", home, strconv.Itoa(v.ID)))
+		file, err := os.Create(fmt.Sprintf("%s/walldl/wallpapers/%s", home, strconv.Itoa(v.ID)))
 
 		if err != nil {
 			log.Fatal(err)
