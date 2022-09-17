@@ -6,6 +6,7 @@ import (
 	"io"
 	"log"
 	"net/http"
+	"net/url"
 	"os"
 	"strconv"
 
@@ -61,7 +62,7 @@ func getWallpapers(category string, number int, apiKey ApiKey) {
 		"GET", 
 		fmt.Sprintf(
 			"https://api.pexels.com/v1/search?query=%s&per_page=%s", 
-			category, 
+			url.QueryEscape(category),
 			strconv.Itoa(number),
 		),
 		nil,
