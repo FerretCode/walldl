@@ -11,5 +11,5 @@ walldl -c "category" -n "1"
 ```
 
 ## arguments
-`walldl -c ""` The category name
-`walldl -n "1"` The number of wallpapers to download (up to 80)
+- `walldl -c ""` The category name
+- `walldl -n "1"` The number of wallpapers to download (up to 80)
