@@ -19,8 +19,8 @@ type Wallpapers struct {
 }
 
 type Wallpaper struct {
-	ID int `json:"id"`
-	URL string `json:"path"`
+	ID     int    `json:"id"`
+	URL    string `json:"path"`
 	Source Source `json:"src"`
 }
 
@@ -55,13 +55,13 @@ func getWallpapers(category string, number int, apiKey ApiKey) {
 	if apiKey.PexelsApiKey == "" {
 		log.Fatal("Please set the WALLDL_API_KEY environment variable to your Pexels API key!")
 	}
-	
+
 	client := &http.Client{}
 
 	req, err := http.NewRequest(
-		"GET", 
+		"GET",
 		fmt.Sprintf(
-			"https://api.pexels.com/v1/search?query=%s&per_page=%s", 
+			"https://api.pexels.com/v1/search?query=%s&per_page=%s",
 			url.QueryEscape(category),
 			strconv.Itoa(number),
 		),
@@ -76,7 +76,7 @@ func getWallpapers(category string, number int, apiKey ApiKey) {
 
 	req.Header.Add("Authorization", apiKey.PexelsApiKey)
 
-	res, err :=	client.Do(req) 
+	res, err := client.Do(req)
 
 	if err != nil {
 		fmt.Printf("There was an error fetching the wallpapers: %s", err)
@@ -96,7 +96,6 @@ func getWallpapers(category string, number int, apiKey ApiKey) {
 
 	if jsonErr != nil {
 		fmt.Printf("There was an error fetching the wallpapers: %s", jsonErr)
-	
 
 		return
 	}
@@ -118,7 +117,9 @@ func getWallpapers(category string, number int, apiKey ApiKey) {
 			log.Fatal(err)
 		}
 
-		file, err := os.Create(fmt.Sprintf("%s/walldl/wallpapers/%s", home, strconv.Itoa(v.ID)))
+		fileName := fmt.Sprintf("%s_%s", category, strconv.Itoa(v.ID))
+
+		file, err := os.Create(fmt.Sprintf("%s/walldl/wallpapers/%s", home, fileName))
 
 		if err != nil {
 			log.Fatal(err)
@@ -132,6 +133,6 @@ func getWallpapers(category string, number int, apiKey ApiKey) {
 			log.Fatal(err)
 		}
 
-		fmt.Printf("Image %s downloaded\n", strconv.Itoa(v.ID))
+		fmt.Printf("Image %s downloaded\n", fileName)
 	}
 }
